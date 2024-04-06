@@ -7,4 +7,6 @@ public interface MinigameManager
    void GameStart();
    void GameReset();
    void GameStop();
+   int GetScore();
+   bool GetWinLose();
 }

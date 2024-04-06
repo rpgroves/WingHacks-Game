@@ -8,6 +8,8 @@ public class GameManager_FlappyBird : MonoBehaviour, MinigameManager
     [SerializeField] FlappyBirdPlayer player;
     Vector3 fboStart;
     Vector3 playerStart;
+    int score = 0;
+    bool won = false;
 
     private void Start()
     {
@@ -29,6 +31,15 @@ public class GameManager_FlappyBird : MonoBehaviour, MinigameManager
     public void GameStop()
     {
         
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+    public bool GetWinLose()
+    {
+        return won;
     }
 
     public void PlayerStartMovement()

@@ -91,4 +91,19 @@ public class GameManager_Pong : MonoBehaviour, MinigameManager
         centerText.gameObject.SetActive(true);
         centerText.text = "Player 1 Wins!";
     }
+
+    public int GetScore()
+    {
+        if(playerScore - opponentScore > 0)
+            return playerScore - opponentScore;
+        else
+            return 0;
+    }
+    public bool GetWinLose()
+    {
+        if(playerScore >= 3)
+            return true;
+        else
+            return false;
+    }
 }

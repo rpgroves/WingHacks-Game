@@ -13,6 +13,7 @@ public class GameManager_Rhythm : MonoBehaviour
     [SerializeField] GameObject pointMapHidden;
     [SerializeField] float dropSpeed = 10.0f;
     [SerializeField] AudioSource music;
+    [SerializeField] int winScore = 1000;
 
     public bool gameOngoing = false;
 
@@ -47,6 +48,18 @@ public class GameManager_Rhythm : MonoBehaviour
     }
     public void GameStop()
     {
+    }
+
+    public int GetScore()
+    {
+        return playerScore;
+    }
+    public bool GetWinLose()
+    {
+        if(playerScore > winScore)
+            return true;
+        else
+            return false;
     }
 
 }
