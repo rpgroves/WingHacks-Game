@@ -12,6 +12,7 @@ public class RhythmPlayer : MonoBehaviour
     [SerializeField] GameObject orangeBox;
     [SerializeField] GameObject pinkBox;
     [SerializeField] GameManager_Rhythm gm;
+    [SerializeField] int pointsPerBlock;
     
     private void OnA()
     {
@@ -30,8 +31,19 @@ public class RhythmPlayer : MonoBehaviour
         HandleInput(pinkBox);
     }
 
+    private void OnReset()
+    {
+        gm.GameReset();
+    }
+
     private void HandleInput(GameObject boxUsed)
     {
+        if(gm.gameOngoing == false)
+        {
+            gm.GameStart();
+            return;
+        }
+
         RaycastHit2D[] scanHits = Physics2D.BoxCastAll(boxUsed.transform.position, Vector3.one, 0.0f, Vector2.up, 1.0f);
 
         if(scanHits != null)
@@ -52,7 +64,7 @@ public class RhythmPlayer : MonoBehaviour
                 return;
 
             float distance = Vector3.Distance(hitObj.transform.position, boxUsed.transform.position);
-            gm.IncrementScore((int)(distance * 100));
+            gm.IncrementScore((int)(distance * pointsPerBlock));
             
             Destroy(hitObj);
         }
