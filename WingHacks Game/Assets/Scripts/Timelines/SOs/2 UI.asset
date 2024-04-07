@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58981c44bc607ba4a98a50dbde2952bb, type: 3}
-  m_Name: Test Dialogue
+  m_Script: {fileID: 11500000, guid: 81719ecee9c8bd64195015d716a018b7, type: 3}
+  m_Name: 2 UI
   m_EditorClassIdentifier: 
+  portrait: {fileID: 21300000, guid: 9e8cf63e0d75c644caef2e6c75e1c89d, type: 3}
+  background: {fileID: 21300000, guid: f0793f06b36a75e4daf0e770dcacad50, type: 3}

@@ -52,7 +52,6 @@ public class RhythmPlayer : MonoBehaviour
 
             foreach(RaycastHit2D rh in scanHits)
             {
-                Debug.Log(rh.transform.gameObject.name);
                 if(rh.transform.gameObject.tag == "Note")
                 {
                     hitObj = rh.transform.gameObject;

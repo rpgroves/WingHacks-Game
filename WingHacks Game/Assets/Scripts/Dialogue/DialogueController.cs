@@ -6,10 +6,10 @@ using TMPro;
 using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
-    GameManager gm;
     [SerializeField] TextMeshProUGUI nameplate;
     [SerializeField] TextMeshProUGUI text;
-    [SerializeField] Image portrait;
+    public Image portrait;
+    public Image background;
     [SerializeField] float textSpeed = 1.0f;
     [SerializeField] GameObject dialogueOptions;
     [SerializeField] TextMeshProUGUI button1Text;
@@ -18,6 +18,7 @@ public class DialogueController : MonoBehaviour
     public TLDialogue dialogue;
     int index = 0;
     List<string> lines;
+    bool isChoice = false;
 
     public static DialogueController Instance { get; private set; }
     void Awake()
@@ -36,28 +37,26 @@ public class DialogueController : MonoBehaviour
 
     void Start()
     {
-        gm = GameManager.Instance;
         dialogueOptions.gameObject.SetActive(false);
-        nameplate.text = dialogue.speaker;
-        lines = dialogue.lines;
-        NextParagraph();
     }
 
     void Update()
     {
-            if(Input.GetMouseButtonDown(0))
+        if(isChoice)
+            return;
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(text.text == lines[index])
             {
-                if(text.text == lines[index])
-                {
-                    index++;
-                    NextParagraph();
-                }
-                else
-                {
-                    StopAllCoroutines();
-                    text.text = lines[index];
-                }
+                index++;
+                NextParagraph();
             }
+            else
+            {
+                StopAllCoroutines();
+                text.text = lines[index];
+            }
+        }
     }
 
     IEnumerator TypeLine()
@@ -78,28 +77,36 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
-            // end dialogue
+            GameManager.Instance.IncrementTimeline();
         }
     }
 
     public void StartNewDialogue(TLDialogue newDialogue)
     {
+        isChoice = false;
+        dialogueOptions.gameObject.SetActive(false);
+        nameplate.text = dialogue.speaker;
+
         text.text = "";
         dialogue = newDialogue;
         lines = dialogue.lines;
+        index = 0;
         NextParagraph();
     }
 
-    public void StartNewDialogueOption(TLDialogueOption newDialogueOption)
+    public void StartNewDialogueChoice(TLDialogueChoice newDialogueChoice)
     {
+        isChoice = true;
         dialogueOptions.gameObject.SetActive(true);
-        button1Text.text = newDialogueOption.option1;
-        button2Text.text = newDialogueOption.option2;
-        button3Text.text = newDialogueOption.option3;
+        button1Text.text = newDialogueChoice.option1;
+        button2Text.text = newDialogueChoice.option2;
+        button3Text.text = newDialogueChoice.option3;
     }
 
     public void ChooseDialogue(int optionChosen)
     {
-
+        Debug.Log("There has been a choice.");
+        dialogueOptions.gameObject.SetActive(false);
+        GameManager.Instance.IncrementTimeline();
     }
 }

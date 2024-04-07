@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TLChangeUI : MonoBehaviour
+[CreateAssetMenu(menuName = "ChangeUI")]
+public class TLChangeUI : ScriptableObject, Timeline
 {
-    // Start is called before the first frame update
-    void Start()
+    public Sprite portrait = null;
+    public Sprite background = null;
+    public string GetTimelineType()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return "change ui";
     }
 }

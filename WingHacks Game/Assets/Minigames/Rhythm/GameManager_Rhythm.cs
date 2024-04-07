@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager_Rhythm : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class GameManager_Rhythm : MonoBehaviour
     [SerializeField] int winScore = 1000;
 
     public bool gameOngoing = false;
+    private float timer = 0.0f;
+    public float timeLimit = 20.0f;
+    public float timeToEnd = 8.0f;
+    private bool isGameEnding = false;
 
     void Start()
     {
@@ -24,6 +29,22 @@ public class GameManager_Rhythm : MonoBehaviour
 
     void Update()
     {
+        if(gameOngoing)
+        {
+            timer += Time.deltaTime;
+            if(timer > timeLimit)
+            {
+                GameStop();
+            }
+        }
+
+        if(isGameEnding)
+        {
+            music.volume -= Time.deltaTime / timeToEnd;
+            if(music.volume < 0.0f)
+                music.volume = 0.0f;
+        }
+        
         pointMap.transform.position = pointMapHidden.transform.position;
     }
     public void IncrementScore(int score)
@@ -45,9 +66,22 @@ public class GameManager_Rhythm : MonoBehaviour
         pointMap.transform.position = pointMapStart;
         pointMapHidden.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
         music.Stop();
+        timer = 0.0f;
     }
     public void GameStop()
     {
+        gameOngoing = false;
+        pointMapHidden.transform.position = pointMapStart;
+        pointMap.transform.position = pointMapStart;
+        pointMapHidden.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+        
+        StartCoroutine(EndRound());
+    }
+    public IEnumerator EndRound()
+    {
+        isGameEnding = true;
+        yield return new WaitForSeconds (4.0f);
+        SceneManager.LoadScene(0);
     }
 
     public int GetScore()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Note
   - Obstacle
+  - Dialogue
   layers:
   - Default
   - TransparentFX

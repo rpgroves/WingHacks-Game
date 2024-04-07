@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Dialogue.unity
+    guid: a29193e14687627469498ab21357aeb2
+  - enabled: 1
+    path: Assets/Scenes/Rhythm.unity
+    guid: 9d311364999126a4dbe3120010fa497d
+  - enabled: 1
+    path: Assets/Scenes/Flappy Bird.unity
+    guid: 135d119c70617964d95f86c6297108e7
+  - enabled: 1
+    path: Assets/Scenes/Pong.unity
+    guid: 11d919fe9a9f4ff4b8930b9d843b28e3
   m_configObjects: {}

@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TLChangeScene : MonoBehaviour
+[CreateAssetMenu(menuName = "ChangeScene")]
+public class TLChangeScene : ScriptableObject, Timeline
 {
-    // Start is called before the first frame update
-    void Start()
+    public int sceneIndex = 0;
+    public string GetTimelineType()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return "change scene";
     }
 }

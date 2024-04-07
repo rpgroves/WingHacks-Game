@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    List<Timeline> timeline;
+    [SerializeField] List<ScriptableObject> timeline;
     DialogueController dialogueController;
     public static GameManager Instance { get; private set; }
     int index = 0;
@@ -30,16 +30,43 @@ public class GameManager : MonoBehaviour
         dialogueController = DialogueController.Instance;
         dialogueController.gameObject.SetActive(false);
 
-        currentTimelineEvent = timeline[index];
+        currentTimelineEvent = timeline[index] as Timeline;
+        HandleTimeline();
     }
     public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     public void IncrementTimeline()
     {
         index++;
-        currentTimelineEvent = timeline[index];
+        if(!(index < timeline.Count))
+        {
+            Debug.Log("End of timeline, warning");
+            return;
+        }
+        currentTimelineEvent = timeline[index] as Timeline;
+        HandleTimeline();
+    }
+
+    private void HandleTimeline()
+    {
+        string type = currentTimelineEvent.GetTimelineType();
+
+        if(type == "dialogue")
+            HandleDialogue();
+        if(type == "dialogue choice")
+            HandleDialogueChoice();
+        if(type == "change ui")
+            HandleChangeUI();
+        if(type == "change scene")
+        {
+            LoadScene((currentTimelineEvent as TLChangeScene).sceneIndex);
+        }
     }
 
     private void HandleDialogue()
@@ -49,10 +76,32 @@ public class GameManager : MonoBehaviour
     }
     private void HandleDialogueChoice()
     {
-
+        dialogueController.gameObject.SetActive(true);
+        dialogueController.StartNewDialogueChoice(currentTimelineEvent as TLDialogueChoice);
     }
     private void HandleChangeUI()
     {
+        Sprite portrait = (currentTimelineEvent as TLChangeUI).portrait;
+        Sprite background = (currentTimelineEvent as TLChangeUI).background;
 
+        if(portrait != null)
+        {
+            dialogueController.portrait.gameObject.SetActive(true);
+            dialogueController.portrait.sprite = portrait;
+        }
+        else
+        {
+            dialogueController.portrait.gameObject.SetActive(false);
+        }
+        if(background != null)
+        {
+            dialogueController.background.gameObject.SetActive(true);
+            dialogueController.background.sprite = background;
+        }
+        else
+        {
+            dialogueController.background.gameObject.SetActive(false);
+        }
+        IncrementTimeline();
     }
 }

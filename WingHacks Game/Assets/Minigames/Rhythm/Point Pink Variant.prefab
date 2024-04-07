@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point Pink Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3825001960035956701, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6340476961218127255, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -61,16 +65,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8436404953513538320, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1600648669, guid: f5220231fdfbae24aa982147c9c7adfc, type: 3}
+    - target: {fileID: 8436404953513538320, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
       propertyPath: m_Color.b
-      value: 0.76056224
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8436404953513538320, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
       propertyPath: m_Color.g
-      value: 0.12442138
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8436404953513538320, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
       propertyPath: m_Color.r
-      value: 0.8792453
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436404953513538320, guid: 13ea30cb3ac1a834f8b0c8361b4c1e5e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
